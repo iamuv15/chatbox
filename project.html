@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<title>ChatBox</title>
+		<style>
+			.chat-container{
+				position: relative;
+				margin: 0 auto;
+				width: 60%;
+				height: 550px;
+			}
+			.msgs-container{
+				height: 500px;
+				border: 1px solid black;
+				overflow-y: auto;
+			}
+			.msg-input{
+				display: flex;
+			}
+			textarea{
+				flex: 8;
+				width: 90%;
+				height: 48px;
+				resize: none;
+				outline: none;
+			}
+			button{
+				flex: 1;	
+				width: 10%;
+				height: 48px;
+			}
+			.style-me{
+				margin: 5px;
+				padding: 10px;
+				background-color: aqua;
+				border: 1px solid grey;
+			}
+		</style>
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div>
+			
+		</div>
+		<div class="chat-container">
+			<div class="msgs-container">
+			<h2>Jquery Chat Box (not linked with database)</h2>
+			<p>Click on send or hit enter to send your message!</p>
+			<p>Styling of the chatbox is not taken into much consideration! Style it according to your need!</p><hr>
+			</div>
+			<div class="msg-input">
+				<textarea id="text" placeholder="Enter Your Message!"></textarea>
+				<button id="btn">Send</button>
+			</div>
+		</div>
+		<script>
+			$('#btn').on('click', function(){
+				var txt = $('#text').val();
+				if(txt != ''){
+					$('.msgs-container').append("<p class='style-me'>"+ txt + "</p>");
+					$('textarea').val('');
+					$('.msgs-container').scrollTop($('.msgs-container').prop('scrollHeight'));
+				}
+			});
+			$('textarea').keypress(function(e){
+				var key = e.which;
+				if(key == 13){
+					var txt = $('#text').val();
+					if(txt != ''){
+						$('.msgs-container').append("<p class='style-me'>"+ txt + "</p>");
+						$('textarea').val('');
+						$('.msgs-container').scrollTop($('.msgs-container').prop('scrollHeight'));
+					}
+					e.preventDefault();
+				}
+			});
+		</script>
+	</body>
+</html>
